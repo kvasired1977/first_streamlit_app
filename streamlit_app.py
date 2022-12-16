@@ -34,10 +34,10 @@ streamlit.dataframe(fruityvice_normalized)
 
 streamlit.header('Fruit Advice from Fruityvise')
 try:
- fruit_choice = streamlit.text_input('What fruit would you like information about?')
-  if not fruit_choice:
+fruit_choice = streamlit.text_input('What fruit would you like information about?')
+ if not fruit_choice:
    streamlit.error("please select a fruit to get info.")
-  else:
+ else:
    #streamlit.write('The user entered ', fruit_choice)
    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
    # write your own comment - display the api result in dataframe/table format
