@@ -1,2 +1,2 @@
 #comments
-snowfalke-connector-python
+snowflake-connector-python
