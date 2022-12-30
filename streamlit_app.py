@@ -32,6 +32,13 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 streamlit.dataframe(fruityvice_normalized)
 
+#create a new function
+def get_fruitywise_data(this_fruit_choice)
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+   # write your own comment - display the api result in dataframe/table format
+   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+  return fruityvice_normalized
+  
 streamlit.header('Fruit Advice from Fruityvise')
 try:
  fruit_choice = streamlit.text_input('What fruit would you like information about?')
@@ -39,10 +46,8 @@ try:
    streamlit.error("please select a fruit to get info.")
  else:
    #streamlit.write('The user entered ', fruit_choice)
-   fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-   # write your own comment - display the api result in dataframe/table format
-   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-   streamlit.dataframe(fruityvice_normalized)
+   back_from_function = get_fruitywise_data(fruit_choice)
+   streamlit.dataframe(back_from_function)
 except URLError as e:
   strealit.error()
 
