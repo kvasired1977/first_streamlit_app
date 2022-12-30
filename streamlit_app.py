@@ -52,14 +52,26 @@ except URLError as e:
   strealit.error()
 
   
-  #Troubleshooting  
+
+
+
+
+
+streamlit.header("fruit_load_list row data contains:")
+#snowflake related functions
+def get_fruit_load_list():
+ with my_cnx.cursor() as my_cur:
+  my_cur.execute("SELECT * from fruit_load_list")
+  return my_cur.fetchall()
+
+#add a button to load the fruit
+if streamlit.button('get fruit load list'):
+ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+ my_data_rows = get_fruit_load_list()
+ streamlit.dataframe(my_data_rows)
+
+ #Troubleshooting  
 streamlit.stop()
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * from fruit_load_list")
-my_data_rows = my_cur.fetchall()
-streamlit.header("fruit_load_list row data:")
-streamlit.dataframe(my_data_rows)
 
 add_fruit = streamlit.text_input('enter another fruit?','test')
 streamlit.write('The user entered ', add_fruit)
